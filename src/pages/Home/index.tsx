@@ -38,7 +38,7 @@ const Home = ({ setLogged }: HomeProps) => {
           </Styled.TitleContainer>
           <Styled.SearchInputContainer className="AQUIIII">
             <SearchIcon />
-            <input placeholder="Procure pelo sabor"/>
+            <input placeholder="Procure o produto"/>
           </Styled.SearchInputContainer>
         </Styled.HomeContentHeader>
         <section>
