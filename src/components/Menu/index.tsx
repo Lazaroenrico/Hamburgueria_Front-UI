@@ -14,7 +14,7 @@ const Menu = ({ path, setLogged }: MenuProps) => {
 
   const handleLogout = () => {
     setLogged(false);
-    navigate("/login");
+    navigate("/");
   };
 
   return (
@@ -23,7 +23,7 @@ const Menu = ({ path, setLogged }: MenuProps) => {
       <nav>
         <Styled.MenuItem active={path === "home"}>
           <Styled.MenuItemButton
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/homepage")}
             active={path === "home"}
           >
             

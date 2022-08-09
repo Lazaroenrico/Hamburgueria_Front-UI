@@ -65,7 +65,6 @@ export const SearchInputContainer = styled.div`
     height: 38px;
     color: #ffffff;
     font-size: 14px;
-
     :focus {
       outline: none;
     }

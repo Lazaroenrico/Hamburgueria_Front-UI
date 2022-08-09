@@ -22,6 +22,7 @@ const Home = ({ setLogged }: HomeProps) => {
     (element) => element.categoryId === selectedCategory.id
   );
 
+
   const actualDate = DateTime.now();
   const formatedDate = `${actualDate.weekdayShort}, ${actualDate.day} ${actualDate.monthLong} ${actualDate.year}`;
 
@@ -35,9 +36,9 @@ const Home = ({ setLogged }: HomeProps) => {
             <h1>Burguer Lazer</h1>
             <p>{formatedDate}</p>
           </Styled.TitleContainer>
-          <Styled.SearchInputContainer>
+          <Styled.SearchInputContainer className="AQUIIII">
             <SearchIcon />
-            <input placeholder="Procure pelo sabor" />
+            <input placeholder="Procure pelo sabor"/>
           </Styled.SearchInputContainer>
         </Styled.HomeContentHeader>
         <section>

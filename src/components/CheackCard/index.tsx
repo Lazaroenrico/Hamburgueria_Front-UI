@@ -15,7 +15,7 @@ const CheckoutCard = ({ product }: CheckoutCardProps) => {
 
   return (
     <Styled.CheckoutCardContainer>
-      <Styled.CheckoutCardHeader>
+      <Styled.CheckoutCardHeader >
         <img alt={product.name} src={product.image} />
         <div>
           <h5 title={product.name}>{product.name}</h5>
