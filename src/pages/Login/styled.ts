@@ -43,16 +43,13 @@ export const LoginLogoContainer = styled.div`
       text-transform: uppercase;
       font-family: ${theme.constants.logoFontFamily};
       color: ${theme.colors.textColor};
-      font-size: 62px;
+      font-size: 30px;
       text-align: center;
       border-top: 2px double ${theme.colors.textColor};
       border-bottom: 2px double ${theme.colors.textColor};
       border-spacing: 1px;
     }
 
-    img {
-      width: 8rem;
-      height: 8rem;
-    }
+    
   `}
 `;

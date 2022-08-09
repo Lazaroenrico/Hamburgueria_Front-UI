@@ -1,10 +1,9 @@
+import { Dispatch, SetStateAction, useState } from "react";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import Button from "../../components/Buttons";
 import Input from "../../components/Inputs";
 import * as Styled from "./styled";
-import logo from "../../assets/loggos/logo.png";
-import Button from "../../components/Buttons";
-import { Dispatch, SetStateAction, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-hot-toast";
 
 interface LoginProps {
   setLogged: Dispatch<SetStateAction<boolean>>;
@@ -31,8 +30,7 @@ const Login = ({ setLogged }: LoginProps) => {
     <Styled.LoginPageContainer>
       <Styled.LoginFormContainer>
         <Styled.LoginLogoContainer>
-          <h1>Burguer Fresh</h1>
-          <img alt="logo" src={logo} />
+          <h1>Burguer Lazer</h1>
         </Styled.LoginLogoContainer>
         <Input
           value={email}
