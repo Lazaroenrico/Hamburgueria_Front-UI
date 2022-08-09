@@ -1,12 +1,14 @@
-import "./App.css";
+import { Toaster } from "react-hot-toast";
 import Router from "./Router";
+import "./App.css";
 
-function App() {
+const App = () => {
   return (
     <div>
-       <Router></Router>
+      <Toaster position="bottom-center" reverseOrder={false} />
+      <Router />
     </div>
   );
-}
+};
 
 export default App;
