@@ -32,7 +32,7 @@ const Home = ({ setLogged }: HomeProps) => {
       <Styled.HomeContentContainer>
         <Styled.HomeContentHeader>
           <Styled.TitleContainer>
-            <h1>Burguer Fresh</h1>
+            <h1>Burguer Lazer</h1>
             <p>{formatedDate}</p>
           </Styled.TitleContainer>
           <Styled.SearchInputContainer>
