@@ -6,7 +6,7 @@ interface ProductsListProps {
   list: Product[];
 }
 
-const ProductsList = ({ list }: ProductsListProps) => {
+const ListProducts = ({ list }: ProductsListProps) => {
   return (
     <Styled.ProductsListContainer>
       {list.map((element) => (
@@ -16,4 +16,4 @@ const ProductsList = ({ list }: ProductsListProps) => {
   ) ;
 };
 
-export default ProductsList;
+export default ListProducts;

@@ -5,11 +5,11 @@ import toast from "react-hot-toast";
 import { TrashIcon } from "../../assets/icons";
 import Input from "../Inputs";
 
-interface CheckoutCardProps {
+interface CheckCardProps {
   product: Product;
 }
 
-const CheckoutCard = ({ product }: CheckoutCardProps) => {
+const CheckCard = ({ product }: CheckCardProps) => {
   const [quantity, setQuantity] = useState<number>(1);
   const [description, setDescription] = useState<string>("");
 
@@ -46,4 +46,4 @@ const CheckoutCard = ({ product }: CheckoutCardProps) => {
   );
 };
 
-export default CheckoutCard;
+export default CheckCard;

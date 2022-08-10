@@ -3,11 +3,11 @@ import { SearchIcon } from "../../assets/icons";
 import Menu from "../../components/Menu";
 import * as Styled from "./styled";
 import { mockedProducts } from "../../mock";
-import ProductsList from "../../components/ListProduct";
+import ListProducts from "../../components/ListProduct";
 import { mockedCategories } from "../../mock";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Category, Product } from "../../types";
-import OrderDetails from "../../components/Details";
+import Details from "../../components/Details";
 
 interface HomeProps {
   setLogged: Dispatch<SetStateAction<boolean>>;
@@ -17,18 +17,21 @@ const Home = ({ setLogged }: HomeProps) => {
   const [selectedCategory, setSelectedCategory] = useState<Category>(
     mockedCategories[0]
   );
+  const [search, setSearch] = useState<string>("");
 
   const filteredProducts: Product[] = mockedProducts.filter(
     (element) => element.categoryId === selectedCategory.id
   );
 
+  const searchProducts = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
 
   const actualDate = DateTime.now();
   const formatedDate = `${actualDate.weekdayShort}, ${actualDate.day} ${actualDate.monthLong} ${actualDate.year}`;
 
   return (
     <Styled.HomeContainer>
-      
       <Menu path="home" setLogged={setLogged} />
       <Styled.HomeContentContainer>
         <Styled.HomeContentHeader>
@@ -36,10 +39,12 @@ const Home = ({ setLogged }: HomeProps) => {
             <h1>Burguer Lazer</h1>
             <p>{formatedDate}</p>
           </Styled.TitleContainer>
+
           <Styled.SearchInputContainer className="AQUIIII">
             <SearchIcon />
-            <input placeholder="Procure o produto"/>
+            <input placeholder="Procure o produto" />
           </Styled.SearchInputContainer>
+          
         </Styled.HomeContentHeader>
         <section>
           <Styled.CategoriesNavigationBar>
@@ -65,10 +70,10 @@ const Home = ({ setLogged }: HomeProps) => {
               <option value="3">3</option>
             </Styled.TableSelect>
           </Styled.ProductsHeaderContainer>
-          <ProductsList list={filteredProducts} />
+          <ListProducts list={filteredProducts} />
         </section>
       </Styled.HomeContentContainer>
-      <OrderDetails />
+      <Details />
     </Styled.HomeContainer>
   );
 };

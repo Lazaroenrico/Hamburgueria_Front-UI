@@ -1,10 +1,10 @@
 import toast from "react-hot-toast";
 import Button from "../Buttons";
-import CheckoutCard from "../CheackCard";
+import CheckCard from "../CheackCard";
 import * as Styled from "./styled";
 import { mockedProducts } from "../../mock";
 
-const OrderDetails = () => {
+const Details = () => {
   return (
     <Styled.OrderDetailsContainer>
 
@@ -35,8 +35,8 @@ const OrderDetails = () => {
           <h3>Preço</h3>
         </Styled.CheckoutDetailsHeader>
         <Styled.CheckoutCardsContainer>
-          <CheckoutCard product={mockedProducts[0]} />
-          <CheckoutCard product={mockedProducts[1]} />
+          <CheckCard product={mockedProducts[0]} />
+          <CheckCard product={mockedProducts[1]} />
         </Styled.CheckoutCardsContainer>
       </Styled.CheckoutDetailsContainer>
       <Styled.OrderDetailsFooter>
@@ -59,4 +59,4 @@ const OrderDetails = () => {
   );
 };
 
-export default OrderDetails;
+export default Details;
