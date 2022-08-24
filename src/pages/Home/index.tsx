@@ -8,31 +8,28 @@ import { mockedCategories } from "../../mock";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Category, Product } from "../../types";
 import Details from "../../components/Details";
+import { useProducts } from "../../context/product";
 
-interface HomeProps {
-  setLogged: Dispatch<SetStateAction<boolean>>;
-}
 
-const Home = ({ setLogged }: HomeProps) => {
+
+const Home = () => {
+  const { products } = useProducts();
+
+
   const [selectedCategory, setSelectedCategory] = useState<Category>(
     mockedCategories[0]
   );
-  const [search, setSearch] = useState<string>("");
-
-  const filteredProducts: Product[] = mockedProducts.filter(
+  
+  const filteredProducts: Product[] = products.filter(
     (element) => element.categoryId === selectedCategory.id
   );
-
-  const searchProducts = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-  };
 
   const actualDate = DateTime.now();
   const formatedDate = `${actualDate.weekdayShort}, ${actualDate.day} ${actualDate.monthLong} ${actualDate.year}`;
 
   return (
     <Styled.HomeContainer>
-      <Menu path="home" setLogged={setLogged} />
+      <Menu path="home"/>
       <Styled.HomeContentContainer>
         <Styled.HomeContentHeader>
           <Styled.TitleContainer>
@@ -40,7 +37,7 @@ const Home = ({ setLogged }: HomeProps) => {
             <p>{formatedDate}</p>
           </Styled.TitleContainer>
 
-          <Styled.SearchInputContainer className="AQUIIII">
+          <Styled.SearchInputContainer>
             <SearchIcon />
             <input placeholder="Procure o produto" />
           </Styled.SearchInputContainer>
@@ -62,7 +59,7 @@ const Home = ({ setLogged }: HomeProps) => {
           <Styled.ProductsHeaderContainer>
             <h2>Escolha seu lanche</h2>
             <Styled.TableSelect defaultValue="">
-              <option value="" disabled>
+              <option value="" disabled>  
                 Selecione a mesa
               </option>
               <option value="1">1</option>

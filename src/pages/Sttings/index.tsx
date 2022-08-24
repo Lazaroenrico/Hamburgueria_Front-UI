@@ -1,20 +1,32 @@
-import { Dispatch, SetStateAction } from "react";
 import Menu from "../../components/Menu";
 import * as Styled from "./styled";
 import { MarketIcon, InfoIcon, PromotionIcon } from "../../assets/icons";
 import Button from "../../components/Buttons";
-import { mockedProducts } from "../../mock";
-import SettingsProductCard from "../../components/CardSettingsProduct";
+import SettingsProductCard from "../../components/ProductSettings";
+import { useProducts } from "../../context/product";
+import { useState } from "react";
+import ProductModal from "../../components/ModalProduct";
+import { Product } from "../../types";
+import DeleteProductModal from "../../components/ModalDelete"
 
-interface SettingsProps {
-  setLogged: Dispatch<SetStateAction<boolean>>;
-}
+const Settings = () => {
+  const { products } = useProducts();
 
-const Settings = ({ setLogged }: SettingsProps) => {
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
+  const [product, setProduct] = useState<Product | undefined>(undefined);
+
+  const handleOpenModal = () => {
+    setOpenModal(!openModal);
+  };
+
+  const handleOpenDeleteModal = () => {
+    setOpenDeleteModal(!openDeleteModal);
+  };
+
   return (
     <Styled.SettingsContainer>
-      
-      <Menu path="settings" setLogged={setLogged} />
+      <Menu path="settings" />
       <Styled.SettingsNavigationContainer>
         <h2>Configurações</h2>
         <Styled.SettingsNavigationButtonsList>
@@ -62,12 +74,18 @@ const Settings = ({ setLogged }: SettingsProps) => {
           </Styled.EntitiesEditCategoriesButton>
         </Styled.EntitiesEditCategoriesSelector>
         <Styled.EntitiesEditList>
-          <Styled.AddEntityCard>
+          <Styled.AddEntityCard onClick={handleOpenModal}>
             <h3>+</h3>
             <p>Adicionar Item</p>
           </Styled.AddEntityCard>
-          {mockedProducts.map((element) => (
-            <SettingsProductCard product={element} key={element.id} />
+          {products.map((element) => (
+            <SettingsProductCard
+              handleOpenModal={handleOpenModal}
+              handleOpenDeleteModal={handleOpenDeleteModal}
+              setProduct={setProduct}
+              product={element}
+              key={element.id}
+            />
           ))}
         </Styled.EntitiesEditList>
         <Styled.ConfirmationContainer>
@@ -75,6 +93,20 @@ const Settings = ({ setLogged }: SettingsProps) => {
           <Button text="Salvar mudanças" />
         </Styled.ConfirmationContainer>
       </Styled.EntitiesEditContainer>
+      {openModal && (
+        <ProductModal
+          setProduct={setProduct}
+          product={product}
+          handleOpenModal={handleOpenModal}
+        />
+      )}
+      {openDeleteModal && (
+        <DeleteProductModal
+          setProduct={setProduct}
+          productId={product?.id}
+          handleOpenDeleteModal={handleOpenDeleteModal}
+        />
+      )}
     </Styled.SettingsContainer>
   );
 };

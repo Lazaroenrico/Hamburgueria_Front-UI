@@ -7,9 +7,8 @@ import { mockedProducts } from "../../mock";
 const Details = () => {
   return (
     <Styled.OrderDetailsContainer>
-
       <Styled.OrderDetailsHeader>
-        <h2>Pedido #12</h2>
+        <h2>Pedido #12</h2> 
         <div>
           <Button text="Comer no local" onClick={() => {}} size="small" />
           <Button
@@ -54,7 +53,6 @@ const Details = () => {
           size="x-large"
         />
       </Styled.OrderDetailsFooter>
-      
     </Styled.OrderDetailsContainer>
   );
 };

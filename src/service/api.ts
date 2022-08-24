@@ -1,5 +1,5 @@
 import axios from "axios";
-
+/*
 const Api = axios.create({
     baseURL: 'https://blue-hamburgueria-production.up.railway.app/'
 })
@@ -18,5 +18,7 @@ Api.interceptors.request.use((config: any) => {
     }
 
 })
+*/
+export const Api = axios.create({ baseURL: "http://localhost:3333" });
 
 export default Api

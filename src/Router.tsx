@@ -1,17 +1,27 @@
-import { useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
+import { useAuth } from "./context/auth";
 import Login from "./pages/Login";
 import Settings from "./pages/Sttings";
 
 const Router = () => {
-  const [logged, setLogged] = useState<boolean>(false);
+  const { logged } = useAuth();
+
 
   return (
     <Routes>
-      <Route path="/homepage" element={<Home setLogged={setLogged} />} />
-      <Route path="/settings" element={<Settings setLogged={setLogged} />} />
-      <Route path="/" element={<Login setLogged={setLogged} />} />
+      {logged ? (
+        <>
+          <Route path="/" element={<Home />} />
+          <Route path="/settings" element={<Settings />} />
+        </>
+      ) : (
+        <Route path="/login" element={<Login />} />
+      )}
+      <Route
+        path="*"
+        element={<Navigate to={logged ? "/" : "/login"} replace />}
+      />
     </Routes>
   );
 };

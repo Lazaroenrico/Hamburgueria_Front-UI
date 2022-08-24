@@ -1,49 +1,70 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
+import { MessageError, StyledInput } from "../../assets/styles/mixins";
 import Button from "../../components/Buttons";
-import Input from "../../components/Inputs";
+import { useAuth } from "../../context/auth";
+import { Api } from "../../service/api";
 import * as Styled from "./styled";
 
-interface LoginProps {
-  setLogged: Dispatch<SetStateAction<boolean>>;
+interface LoginData {
+  email: string;
+  password: string;
 }
 
-const Login = ({ setLogged }: LoginProps) => {
-  const navigate = useNavigate();
+const loginSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email("O formato de e-mail está inválido")
+    .required("Campo de e-mail obrigatório"),
 
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  password: yup
+    .string()
+    .min(8, "Sua senha deve ter no mínimo 8 caracteres")
+    .matches(
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/,
+      "Sua senha deve ter no mímino 1 caracter especial, um número e uma letra maiúscula"
+    )
+    .required("Campo de senha obrigatório"),
+});
 
-  const handleLogin = () => {
-    if (email === "admin" && password === "admin") {
-      setLogged(true);
-      navigate("/");
-      toast.success("Login bem sucedido!");
-      return;
-    }
+const Login = () => {
+  const { login } = useAuth();  
 
-    toast.error("Usuário ou senha incorretos.");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginData>({ resolver: yupResolver(loginSchema) });
+
+  const handleLogin = (data: LoginData) => {
+    Api
+      .post("/auth/login", data)
+      .then((res) => {
+        login({ token: res.data.token, user: res.data.user });
+      })
+      .catch(() => {
+        toast.error("Usuário ou senha inválido");
+      });
   };
 
   return (
     <Styled.LoginPageContainer>
-      <Styled.LoginFormContainer>
+      <Styled.LoginFormContainer onSubmit={handleSubmit(handleLogin)}>
         <Styled.LoginLogoContainer>
           <h1>Burguer Lazer</h1>
         </Styled.LoginLogoContainer>
-        <Input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-        />
-        <Input
+        <StyledInput placeholder="Email" {...register("email")} />
+        <StyledInput
           type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
           placeholder="Senha"
+          {...register("password")}
         />
-        <Button text="Entrar" size="large" onClick={handleLogin} />
+        <MessageError>
+          {errors.email?.message || errors.password?.message}
+        </MessageError>
+        <Button text="Entrar" size="large" type="submit" />
       </Styled.LoginFormContainer>
     </Styled.LoginPageContainer>
   );

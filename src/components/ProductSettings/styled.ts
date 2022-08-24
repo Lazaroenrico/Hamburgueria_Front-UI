@@ -13,6 +13,11 @@ export const SettingsProductCardContainer = styled.div`
     color: ${theme.colors.textColor};
     text-align: center;
 
+    div {
+      display: flex;
+      width: 100%;
+    }
+
     img {
       width: 10.25rem;
     }

@@ -6,14 +6,14 @@ import { Dispatch, SetStateAction } from "react";
 
 interface MenuProps {
   path: "home" | "settings";
-  setLogged: Dispatch<SetStateAction<boolean>>;
+  
 }
 
-const Menu = ({ path, setLogged }: MenuProps) => {
+const Menu = ({ path, }: MenuProps) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    setLogged(false);
+  
     navigate("/");
   };
 
